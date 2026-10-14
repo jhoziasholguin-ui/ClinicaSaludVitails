@@ -1,0 +1,150 @@
+/* ==========================================================================
+   1. VARIABLES Y CONFIGURACIÓN BASE
+   ========================================================================== */
+:root {
+    --primary-color: #0D6EFD;
+    --secondary-color: #0A4FA3;
+    --background-color: #F4F8FC;
+    --card-color: #FFFFFF;
+    --text-color: #2C3E50;
+    --border-color: #E4EAF2;
+}
+
+html {
+    font-size: 16px;
+    min-height: 100%;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ENLACES GLOBALES */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+    a:hover {
+        color: var(--secondary-color);
+    }
+
+/* TÍTULOS */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   2. UTILIDADES DE LA PLANTILLA BASE (OPTIMIZADAS)
+   ========================================================================== */
+.border-top {
+    border-top: 1px solid var(--border-color) !important;
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* ==========================================================================
+   3. COMPONENTES PERSONALIZADOS
+   ========================================================================== */
+
+/* NAVBAR */
+.navbar {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+
+.navbar-brand {
+    font-size: 1.2rem;
+    font-weight: 600;
+    white-space: normal;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+/* Navegación activa estilo "Pills" (si decides usarla en alguna vista) */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--secondary-color);
+}
+
+/* CARDS */
+.card {
+    border-radius: 12px;
+    border: none;
+    background-color: var(--card-color);
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+}
+
+.card-header {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* TABLAS */
+.table th {
+    font-weight: 600;
+}
+
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8fbff;
+}
+
+/* FORMULARIOS */
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #d9e2ef;
+}
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 .15rem rgba(13,110,253,.15);
+    }
+
+/* BOTONES */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+    .btn-primary:hover {
+        color: #fff;
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+    }
+
+/* FOOTER (ESTILO LIMPIO PARA FLEXBOX) */
+.footer {
+    background-color: #ffffff;
+    border-top: 1px solid var(--border-color);
+}

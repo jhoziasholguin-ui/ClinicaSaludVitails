@@ -1,0 +1,99 @@
+﻿@model ClinicaSaludVitails.Models.Cita
+
+@{
+    ViewData["Title"] = "Eliminar Cita";
+}
+
+<div class="container py-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-danger text-white">
+
+                    <h3 class="mb-1">
+                        🗑 Eliminar Cita Médica
+                    </h3>
+
+                    <small>
+                        Verifique la información antes de eliminar el registro.
+                    </small>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="alert alert-warning">
+
+                        <strong>¿Está seguro de eliminar esta cita?</strong><br />
+                        Esta acción no se puede deshacer.
+
+                    </div>
+
+                    <table class="table table-bordered table-hover">
+
+                        <tbody>
+
+                            <tr>
+                                <th width="30%">Paciente</th>
+                                <td>@Html.DisplayFor(model => model.Paciente.Apellidos)</td>
+                            </tr>
+
+                            <tr>
+                                <th>Médico</th>
+                                <td>@Html.DisplayFor(model => model.Medico.Apellidos)</td>
+                            </tr>
+
+                            <tr>
+                                <th>Fecha</th>
+                                <td>@Html.DisplayFor(model => model.Fecha)</td>
+                            </tr>
+
+                            <tr>
+                                <th>Hora</th>
+                                <td>@Html.DisplayFor(model => model.Hora)</td>
+                            </tr>
+
+                            <tr>
+                                <th>Estado</th>
+                                <td>
+                                    <span class="badge bg-primary">
+                                        @Html.DisplayFor(model => model.Estado)
+                                    </span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <form asp-action="Delete">
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+
+                            <a asp-action="Index" class="btn btn-secondary">
+                                ↩ Cancelar
+                            </a>
+
+                            <button type="submit" class="btn btn-danger">
+                                🗑 Eliminar
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,137 @@
+﻿@model ClinicaSaludVitails.Models.Paciente
+
+@{
+    ViewData["Title"] = "Editar Paciente";
+}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-10 col-lg-8">
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-header bg-white">
+
+                <h3 class="text-primary mb-0">
+                    Editar Paciente
+                </h3>
+
+                <small class="text-muted">
+                    Actualice la información del paciente registrado
+                </small>
+
+            </div>
+
+            <div class="card-body">
+
+                <form asp-action="Edit">
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="alert alert-danger">
+                    </div>
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label asp-for="DNI"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="DNI"
+                                   class="form-control" />
+
+                            <span asp-validation-for="DNI"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label asp-for="Telefono"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="Telefono"
+                                   class="form-control" />
+
+                            <span asp-validation-for="Telefono"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+
+                            <label asp-for="Nombres"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="Nombres"
+                                   class="form-control" />
+
+                            <span asp-validation-for="Nombres"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+
+                            <label asp-for="Apellidos"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="Apellidos"
+                                   class="form-control" />
+
+                            <span asp-validation-for="Apellidos"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+
+                    <div class="d-flex gap-2">
+
+                        <button type="submit"
+                                class="btn btn-primary">
+
+                            Guardar Cambios
+
+                        </button>
+
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary">
+
+                            Cancelar
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

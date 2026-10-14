@@ -1,0 +1,115 @@
+﻿@model ClinicaSaludVitails.Models.Paciente
+
+@{
+    ViewData["Title"] = "Eliminar Paciente";
+}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-8">
+
+        <div class="card shadow-sm border-0">
+
+            <div class="card-header bg-danger text-white">
+
+                <h3 class="mb-0">
+                    Eliminar Paciente
+                </h3>
+
+                <small>
+                    Esta acción no se puede deshacer
+                </small>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="alert alert-warning">
+
+                    <strong>Advertencia:</strong>
+                    Está a punto de eliminar el registro del paciente.
+                    Verifique la información antes de continuar.
+
+                </div>
+
+                <div class="row mb-3">
+
+                    <div class="col-md-4 fw-bold text-secondary">
+                        DNI
+                    </div>
+
+                    <div class="col-md-8">
+                        @Model.DNI
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+
+                    <div class="col-md-4 fw-bold text-secondary">
+                        Nombres
+                    </div>
+
+                    <div class="col-md-8">
+                        @Model.Nombres
+                    </div>
+
+                </div>
+
+                <div class="row mb-3">
+
+                    <div class="col-md-4 fw-bold text-secondary">
+                        Apellidos
+                    </div>
+
+                    <div class="col-md-8">
+                        @Model.Apellidos
+                    </div>
+
+                </div>
+
+                <div class="row mb-4">
+
+                    <div class="col-md-4 fw-bold text-secondary">
+                        Teléfono
+                    </div>
+
+                    <div class="col-md-8">
+                        @Model.Telefono
+                    </div>
+
+                </div>
+
+                <hr />
+
+                <form asp-action="Delete">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="d-flex gap-2">
+
+                        <button type="submit"
+                                class="btn btn-danger">
+
+                            Confirmar Eliminación
+
+                        </button>
+
+                        <a asp-action="Index"
+                           class="btn btn-outline-secondary">
+
+                            Cancelar
+
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

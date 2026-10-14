@@ -1,0 +1,222 @@
+﻿@model ClinicaSaludVitails.ViewModels.HomeDashboardViewModel
+
+
+
+
+<!-- Indicadores del dashboard -->
+<div class="row g-3 mb-4">
+    <div class="col-12">
+        <h2 class="h4 fw-bold text-dark">Resumen general</h2>
+        <p class="text-muted">Estadísticas actualizadas desde el sistema.</p>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Total de citas</span>
+                    <i class="bi bi-calendar-check fs-3 text-primary"></i>
+                </div>
+                <h2 class="fw-bold mt-3 mb-0">@Model.TotalCitas</h2>
+                <small class="text-muted">Registros de citas</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Programadas</span>
+                    <i class="bi bi-clock-history fs-3 text-warning"></i>
+                </div>
+                <h2 class="fw-bold mt-3 mb-0">@Model.CitasProgramadas</h2>
+                <small class="text-muted">Citas por atender</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Atendidas</span>
+                    <i class="bi bi-check-circle fs-3 text-success"></i>
+                </div>
+                <h2 class="fw-bold mt-3 mb-0">@Model.CitasAtendidas</h2>
+                <small class="text-muted">Atenciones realizadas</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xl-3">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Canceladas</span>
+                    <i class="bi bi-calendar-x fs-3 text-danger"></i>
+                </div>
+                <h2 class="fw-bold mt-3 mb-0">@Model.CitasCanceladas</h2>
+                <small class="text-muted">Citas canceladas</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+                <span class="text-muted">Pacientes registrados</span>
+                <h2 class="fw-bold mt-2 mb-0">@Model.TotalPacientes</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+                <span class="text-muted">Médicos registrados</span>
+                <h2 class="fw-bold mt-2 mb-0">@Model.TotalMedicos</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gráficos estadísticos -->
+<div class="row g-4 mb-5">
+    <div class="col-12 col-lg-8">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+                <h3 class="h5 fw-bold">Citas por mes</h3>
+                <p class="text-muted small">
+                    Distribución de las citas del año actual.
+                </p>
+                <div style="position:relative; height:300px;">
+                    <canvas id="graficoCitasMes"
+                            aria-label="Gráfico de citas por mes"
+                            role="img"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-lg-4">
+        <div class="card border-0 shadow-sm rounded-4 h-100">
+            <div class="card-body p-4">
+                <h3 class="h5 fw-bold">Citas por estado</h3>
+                <p class="text-muted small">
+                    Distribución según el estado de cada cita.
+                </p>
+                <div style="position:relative; height:300px;">
+                    <canvas id="graficoCitasEstado"
+                            aria-label="Gráfico de citas por estado"
+                            role="img"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const meses = @Html.Raw(
+        System.Text.Json.JsonSerializer.Serialize(Model.Meses));
+
+    const citasPorMes = @Html.Raw(
+        System.Text.Json.JsonSerializer.Serialize(Model.CitasPorMes));
+
+    const estados = @Html.Raw(
+        System.Text.Json.JsonSerializer.Serialize(Model.Estados));
+
+    const citasPorEstado = @Html.Raw(
+        System.Text.Json.JsonSerializer.Serialize(Model.CitasPorEstado));
+
+    new Chart(document.getElementById('graficoCitasMes'), {
+        type: 'bar',
+        data: {
+            labels: meses,
+            datasets: [{
+                label: 'Citas',
+                data: citasPorMes,
+                backgroundColor: '#4e73df',
+                borderRadius: 6,
+                maxBarThickness: 35
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { precision: 0 }
+                }
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('graficoCitasEstado'), {
+        type: 'doughnut',
+        data: {
+            labels: estados,
+            datasets: [{
+                data: citasPorEstado,
+                backgroundColor: ['#f6c23e', '#1cc88a', '#e74a3b'],
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+
+
+
+<div class="card border-0 bg-light rounded-4 p-4 mt-5">
+    <div class="card-body">
+        <div class="row text-center g-4">
+
+            <div class="col-md-4">
+                <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
+                    <i class="bi bi-shield-check fs-2 text-primary"></i>
+                    <div class="text-start">
+                        <h6 class="mb-0 fw-bold">Seguridad Cifrada</h6>
+                        <p class="text-muted small mb-0">Protección estricta de datos clínicos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
+                    <i class="bi bi-lightning-charge fs-2 text-success"></i>
+                    <div class="text-start">
+                        <h6 class="mb-0 fw-bold">Alta Disponibilidad</h6>
+                        <p class="text-muted small mb-0">Agendamiento ágil sin demoras.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
+                    <i class="bi bi-layers fs-2 text-dark"></i>
+                    <div class="text-start">
+                        <h6 class="mb-0 fw-bold">Todo Integrado</h6>
+                        <p class="text-muted small mb-0">Médicos e historiales interconectados.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

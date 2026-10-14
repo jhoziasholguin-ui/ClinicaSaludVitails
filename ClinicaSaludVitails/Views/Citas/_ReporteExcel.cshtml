@@ -1,0 +1,129 @@
+﻿@model IEnumerable<ClinicaSaludVitails.Models.Cita>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Reporte de Citas</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 30px;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #0d6efd;
+            margin-bottom: 5px;
+        }
+
+        h4 {
+            text-align: center;
+            color: #666;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #0d6efd;
+            color: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: right;
+            color: gray;
+            font-size: 12px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Clínica Salud Vitalis</h2>
+    <h4>Reporte General de Citas Médicas</h4>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Paciente</th>
+                <th>DNI</th>
+                <th>Médico</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Estado</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.Id</td>
+
+                    <td>
+                        @(item.Paciente != null
+                                            ? item.Paciente.Nombres + " " + item.Paciente.Apellidos
+                                            : "No asignado")
+                                                        </td>
+
+                    <td>@item.Paciente?.DNI</td>
+
+                    <td>
+                        @(item.Medico != null
+                                            ? item.Medico.Nombres + " " + item.Medico.Apellidos
+                                            : "No asignado")
+                </td>
+
+                    <td>@item.Fecha.ToString("dd/MM/yyyy")</td>
+
+                    <td>@item.Hora</td>
+
+                    <td>@item.Estado</td>
+
+                </tr>
+                        }
+
+        </tbody>
+
+    </table>
+
+    <div class="footer">
+        Generado el: @DateTime.Now.ToString("dd/MM/yyyy HH:mm")
+    </div>
+
+</body>
+</html>

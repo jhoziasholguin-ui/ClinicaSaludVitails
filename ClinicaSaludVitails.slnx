@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ClassLibrary1/ClinicaSaludVitails.Data.csproj" Id="34970816-0ae9-453f-9f0a-0b06e47c007f" />
+  <Project Path="ClinicaSaludVitails.Core/ClinicaSaludVitails.Core.csproj" Id="34465e80-7766-4ad3-8b3e-147c853e6edd" />
+  <Project Path="ClinicaSaludVitails/ClinicaSaludVitails.csproj" />
+</Solution>

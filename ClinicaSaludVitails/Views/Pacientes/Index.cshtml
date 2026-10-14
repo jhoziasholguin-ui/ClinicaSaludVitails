@@ -1,0 +1,106 @@
+﻿@model IEnumerable<ClinicaSaludVitails.Models.Paciente>
+
+@{
+    ViewData["Title"] = "Pacientes";
+}
+
+<div class="container py-4">
+
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+
+        <div class="card-header text-white p-4" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h3 class="mb-1 fw-bold d-flex align-items-center gap-2">
+                        <i class="bi bi-people-fill"></i> Clientes / Pacientes
+                    </h3>
+                    <p class="text-white-50 small mb-0">
+                        Gestión, registro y administración de la base de pacientes
+                    </p>
+                </div>
+
+                <div>
+                    <a asp-action="Create" class="btn btn-light text-primary fw-semibold shadow-sm d-flex align-items-center gap-2">
+                        <i class="bi bi-person-plus-fill fs-5"></i> Nuevo Paciente
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="mb-4 d-flex align-items-center justify-content-between">
+                <span class="badge bg-primary-subtle text-primary fs-6 px-3 py-2 rounded-3 fw-semibold">
+                    <i class="bi bi-hash"></i> Total de pacientes: @Model.Count()
+                </span>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info text-center rounded-3 p-5 border-0 bg-light">
+                    <i class="bi bi-person-bounding-box text-info display-4 mb-3 d-block"></i>
+                    <h5 class="fw-bold">No hay pacientes registrados</h5>
+                    <p class="text-muted mb-0">
+                        Presione el botón <strong class="text-primary">"Nuevo Paciente"</strong> para dar de alta al primero.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light text-secondary text-uppercase fs-7 opacity-75">
+                            <tr>
+                                <th class="ps-3">DNI / Identificación</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Teléfono</th>
+                                <th width="180" class="text-end pe-3">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="ps-3">
+                                        <span class="badge bg-primary-subtle text-primary fw-semibold px-3 py-2 rounded-2">
+                                            @item.DNI
+                                        </span>
+                                    </td>
+
+                                    <td class="fw-medium text-dark">
+                                        @item.Nombres
+                                    </td>
+
+                                    <td class="fw-medium text-dark">
+                                        @item.Apellidos
+                                    </td>
+
+                                    <td class="text-secondary">
+                                        <span class="badge bg-light text-dark border fw-normal px-2 py-1.5">
+                                            <i class="bi bi-telephone-fill text-muted me-1"></i> @item.Telefono
+                                        </span>
+                                    </td>
+
+                                    <td class="pe-3 text-end">
+                                        <div class="d-inline-flex gap-2">
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-light text-primary border shadow-sm" title="Ver Historial">
+                                                <i class="bi bi-eye-fill"></i>
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-light text-warning border shadow-sm" title="Editar datos">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-light text-danger border shadow-sm" title="Dar de baja">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

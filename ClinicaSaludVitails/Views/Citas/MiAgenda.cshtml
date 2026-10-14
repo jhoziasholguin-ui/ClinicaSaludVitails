@@ -1,0 +1,318 @@
+﻿@model IEnumerable<ClinicaSaludVitails.Models.Cita>
+
+@{
+    ViewData["Title"] = "Mi Agenda Médica";
+}
+
+<div class="container py-4">
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header bg-primary text-white">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+
+                <div>
+
+                    <h3 class="mb-0">
+                        <i class="bi bi-person-badge-fill"></i>
+                        Mi Agenda Médica
+                    </h3>
+
+                    <small>
+                        Pacientes programados para atención
+                    </small>
+
+                </div>
+
+                <div>
+
+                    <span class="badge bg-success fs-6">
+                        <i class="bi bi-wifi"></i> Conectado
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="mb-3">
+
+                <span class="badge bg-dark fs-6">
+                    Total de citas: @Model.Count()
+                </span>
+
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered align-middle">
+
+                    <thead class="table-primary text-center">
+
+                        <tr>
+
+                            <th>Hora</th>
+                            <th>Fecha</th>
+                            <th>Paciente</th>
+                            <th>DNI</th>
+                            <th>Estado</th>
+                            <th width="180">Acción</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @if (!Model.Any())
+                        {
+                            <tr>
+
+                                <td colspan="6" class="text-center py-5">
+
+                                    <i class="bi bi-calendar-x display-5 text-secondary"></i>
+
+                                    <h5 class="mt-3">
+                                        No existen citas programadas.
+                                    </h5>
+
+                                </td>
+
+                            </tr>
+                        }
+                        else
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td class="text-center fw-bold text-primary">
+                                        @item.Hora
+                                    </td>
+
+                                    <td class="text-center">
+                                        @item.Fecha.ToString("dd/MM/yyyy")
+                                    </td>
+
+                                    <td>
+                                        <i class="bi bi-person-fill text-primary"></i>
+                                        @(item.Paciente?.Nombres) @(item.Paciente?.Apellidos)
+                                    </td>
+
+                                    <td>
+                                        @item.Paciente?.DNI
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        @if (item.Estado == "Programada")
+                                        {
+                                            <span class="badge bg-primary">
+                                                Programada
+                                            </span>
+                                        }
+                                        else if (item.Estado == "Confirmada")
+                                        {
+                                            <span class="badge bg-warning text-dark">
+                                                Confirmada
+                                            </span>
+                                        }
+                                        else if (item.Estado == "Atendida")
+                                        {
+                                            <span class="badge bg-success">
+                                                Atendida
+                                            </span>
+                                        }
+                                        else if (item.Estado == "Cancelada")
+                                        {
+                                            <span class="badge bg-danger">
+                                                Cancelada
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-secondary">
+                                                @item.Estado
+                                            </span>
+                                        }
+
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <button class="btn btn-info btn-sm text-white"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#modalHistorial-@item.Id">
+
+                                            <i class="bi bi-eye-fill"></i>
+                                            Ver Historial
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+                                <!-- Modal -->
+
+                                <div class="modal fade"
+                                     id="modalHistorial-@item.Id"
+                                     tabindex="-1"
+                                     aria-hidden="true">
+
+                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+
+                                        <div class="modal-content border-0 shadow-lg">
+
+                                            <div class="modal-header bg-info text-white">
+
+                                                <h5 class="modal-title">
+
+                                                    <i class="bi bi-journal-medical"></i>
+
+                                                    Historia Clínica (Fase 2)
+
+                                                </h5>
+
+                                                <button type="button"
+                                                        class="btn-close btn-close-white"
+                                                        data-bs-dismiss="modal">
+                                                </button>
+
+                                            </div>
+
+                                            <div class="modal-body">
+
+                                                <div class="row">
+
+                                                    <div class="col-md-6">
+
+                                                        <p>
+                                                            <strong>Paciente:</strong><br />
+                                                            @(item.Paciente?.Nombres) @(item.Paciente?.Apellidos)
+                                                        </p>
+
+                                                        <p>
+                                                            <strong>DNI:</strong><br />
+                                                            @item.Paciente?.DNI
+                                                        </p>
+
+                                                    </div>
+
+                                                    <div class="col-md-6">
+
+                                                        <p>
+                                                            <strong>Fecha:</strong><br />
+                                                            @item.Fecha.ToString("dd/MM/yyyy")
+                                                        </p>
+
+                                                        <p>
+                                                            <strong>Médico:</strong><br />
+                                                            Dr. @(item.Medico?.Nombres) @(item.Medico?.Apellidos)
+                                                        </p>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <hr />
+
+                                                <div class="alert alert-warning">
+
+                                                    <i class="bi bi-lightbulb-fill"></i>
+
+                                                    <strong>Fase 2:</strong>
+
+                                                    El módulo de historia clínica,
+                                                    recetas digitales y evolución
+                                                    médica será implementado en la
+                                                    siguiente fase del proyecto.
+
+                                                </div>
+
+                                                <div class="card bg-light border-0">
+
+                                                    <div class="card-body">
+
+                                                        <h5 class="text-primary">
+
+                                                            <i class="bi bi-clipboard2-pulse-fill"></i>
+
+                                                            Datos Simulados
+
+                                                        </h5>
+
+                                                        <hr />
+
+                                                        <p>
+
+                                                            <strong>Último Diagnóstico:</strong>
+                                                            Faringitis Aguda.
+
+                                                        </p>
+
+                                                        <p>
+
+                                                            <strong>Alergias:</strong>
+                                                            Penicilina.
+
+                                                        </p>
+
+                                                        <p>
+
+                                                            <strong>Grupo Sanguíneo:</strong>
+                                                            O Positivo (O+).
+
+                                                        </p>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="modal-footer">
+
+                                                <button class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">
+
+                                                    <i class="bi bi-x-circle"></i>
+
+                                                    Cerrar
+
+                                                </button>
+
+                                                <button class="btn btn-outline-primary" disabled>
+
+                                                    <i class="bi bi-printer"></i>
+
+                                                    Imprimir Receta
+
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            }
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

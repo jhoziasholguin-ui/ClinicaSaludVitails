@@ -1,0 +1,193 @@
+﻿@model ClinicaSaludVitails.Models.Usuario
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@{
+    ViewData["Title"] = "Registro de Usuario";
+    bool permitirAdmin = Configuration.GetValue<bool>("AppSettings:PermitirRegistroAdmin");
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Crear Cuenta</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <style>
+        body {
+            background: linear-gradient(135deg,#0d6efd,#4fc3f7);
+            height: 100vh;
+        }
+
+        .register-card {
+            border-radius: 20px;
+        }
+
+        .logo {
+            font-size: 65px;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+        }
+
+        .btn-success {
+            border-radius: 10px;
+            transition: .3s;
+        }
+
+            .btn-success:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 15px rgba(0,0,0,.2);
+            }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container h-100">
+
+        <div class="row h-100 justify-content-center align-items-center">
+
+            <div class="col-md-5">
+
+                <div class="card register-card shadow-lg border-0">
+
+                    <div class="card-body p-5">
+
+                        <div class="text-center mb-4">
+
+                            <div class="logo">
+                                🏥
+                            </div>
+
+                            <h2 class="fw-bold text-success">
+                                Clínica Salud Vitalis
+                            </h2>
+
+                            <p class="text-muted">
+                                Registro de Personal
+                            </p>
+
+                        </div>
+
+                        <form asp-action="Register" method="post">
+
+                            <div asp-validation-summary="ModelOnly"
+                                 class="text-danger mb-3">
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Correo Institucional
+                                </label>
+
+                                <input asp-for="Correo"
+                                       type="email"
+                                       class="form-control"
+                                       placeholder="usuario@clinica.com"
+                                       required />
+
+                                <span asp-validation-for="Correo"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    Contraseña
+                                </label>
+
+                                <input asp-for="Password"
+                                       type="password"
+                                       class="form-control"
+                                       placeholder="Ingrese una contraseña"
+                                       required />
+
+                                <span asp-validation-for="Password"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <div class="mb-4">
+
+                                <label class="form-label">
+                                    Rol
+                                </label>
+
+                                <select asp-for="Rol"
+                                        class="form-select"
+                                        required>
+
+                                    @if (permitirAdmin)
+                                    {
+                                        <option value="Administrador">Administrador</option>
+                                    }
+
+                                    <option value="Recepcionista">
+                                        Recepcionista
+                                    </option>
+
+                                    <option value="Medico">
+                                        Médico
+                                    </option>
+
+                                </select>
+
+                                <span asp-validation-for="Rol"
+                                      class="text-danger"></span>
+
+                            </div>
+
+                            <div class="d-grid">
+
+                                <button type="submit"
+                                        class="btn btn-success btn-lg">
+
+                                    Registrar Usuario
+
+                                </button>
+
+                            </div>
+
+                            <div class="text-center mt-4">
+
+                                <a asp-action="Login"
+                                   class="text-decoration-none">
+
+                                    ¿Ya tienes cuenta? Inicia sesión
+
+                                </a>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+                <div class="text-center text-white mt-3">
+
+                    <small>
+                        © 2026 Clínica Salud Vitalis
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

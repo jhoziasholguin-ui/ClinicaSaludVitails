@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<style>
+    .hover-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.15) !important;
+        }
+
+    .icon-shape {
+        width: 60px;
+        height: 60px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+    }
+</style>
+
+<div class="row align-items-center mb-5 g-5">
+    <div class="col-lg-6 text-center text-lg-start">
+        <span class="badge bg-primary-subtle text-primary mb-3 px-3 py-2 rounded-pill fw-semibold fs-6">
+            Panel Administrativo
+        </span>
+        <h1 class="display-4 text-dark mb-3">
+            Clínica <span class="text-primary fw-bold">Salud Vitalis</span>
+        </h1>
+        <p class="lead text-secondary mb-4">
+            Optimiza la atención médica, agenda citas en tiempo real y gestiona el flujo de trabajo de tu equipo desde una plataforma centralizada y segura.
+        </p>
+        <a href="#modulos" class="btn btn-primary btn-lg px-4 shadow-sm rounded-3">
+            <i class="bi bi-speedometer2 me-2"></i>Explorar Módulos
+        </a>
+    </div>
+
+    <div class="col-lg-6 d-none d-lg-block text-center">
+        <img src="~/images/dashboard-hero.svg"
+             alt="Salud Vitalis"
+             class="img-fluid"
+             style="max-height: 380px;"
+             onerror="this.onerror=null; this.src='https://img.freepik.com/vector-gratis/concepto-control-salud-diseno-plano-ilustrado_23-2148851412.jpg';">
+    </div>
+</div>
+
+<hr class="text-muted opacity-25 my-5">
+
+
+
+
+<div id="modulos" class="row g-4 mb-5">
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0 rounded-4 h-100 hover-card">
+            <div class="card-body p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="icon-shape bg-primary-subtle text-primary mb-3">
+                        <i class="bi bi-people-fill fs-3"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark">Pacientes</h4>
+                    <p class="text-muted small">Historiales clínicos, datos de contacto y registros de ingreso.</p>
+                </div>
+                <a asp-controller="Pacientes" asp-action="Index" class="btn btn-outline-primary w-100 rounded-3 mt-3">
+                    Gestionar <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0 rounded-4 h-100 hover-card">
+            <div class="card-body p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="icon-shape bg-success-subtle text-success mb-3">
+                        <i class="bi bi-person-badge-fill fs-3"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark">Médicos</h4>
+                    <p class="text-muted small">Control de turnos, horarios disponibles y asignaciones profesionales.</p>
+                </div>
+                <a asp-controller="Medicos" asp-action="Index" class="btn btn-outline-success w-100 rounded-3 mt-3">
+                    Gestionar <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0 rounded-4 h-100 hover-card">
+            <div class="card-body p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="icon-shape bg-warning-subtle text-warning mb-3">
+                        <i class="bi bi-heart-pulse-fill fs-3"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark">Especialidades</h4>
+                    <p class="text-muted small">Catálogo de ramas médicas, áreas clínicas e infraestructura.</p>
+                </div>
+                <a asp-controller="Especialidads" asp-action="Index" class="btn btn-outline-warning w-100 rounded-3 mt-3">
+                    Gestionar <i class="bi bi-arrow-right ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="card shadow-sm border-0 rounded-4 h-100 hover-card">
+            <div class="card-body p-4 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="icon-shape bg-danger-subtle text-danger mb-3">
+                        <i class="bi bi-calendar-check-fill fs-3"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark">Citas Médicas</h4>
+                    <p class="text-muted small">Reservas, cancelaciones y control de agendas diarias.</p>
+                </div>
+                <a asp-controller="Citas" asp-action="Index" class="btn btn-danger w-100 rounded-3 mt-3 shadow-sm">
+                    Agendar Cita <i class="bi bi-plus-lg ms-1"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card border-0 bg-light rounded-4 p-4 mt-5">
+    <div class="card-body">
+        <div class="row text-center g-4">
+
+            <div class="col-md-4">
+                <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
+                    <i class="bi bi-shield-check fs-2 text-primary"></i>
+                    <div class="text-start">
+                        <h6 class="mb-0 fw-bold">Seguridad Cifrada</h6>
+                        <p class="text-muted small mb-0">Protección estricta de datos clínicos.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
+                    <i class="bi bi-lightning-charge fs-2 text-success"></i>
+                    <div class="text-start">
+                        <h6 class="mb-0 fw-bold">Alta Disponibilidad</h6>
+                        <p class="text-muted small mb-0">Agendamiento ágil sin demoras.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="d-flex align-items-center justify-content-center justify-content-md-start gap-3">
+                    <i class="bi bi-layers fs-2 text-dark"></i>
+                    <div class="text-start">
+                        <h6 class="mb-0 fw-bold">Todo Integrado</h6>
+                        <p class="text-muted small mb-0">Médicos e historiales interconectados.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

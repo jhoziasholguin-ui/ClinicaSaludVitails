@@ -1,0 +1,127 @@
+﻿@model IEnumerable<ClinicaSaludVitails.Models.Medico>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["Mensaje"]
+        <button type="button" class="btn-close"
+                data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close"
+                data-bs-dismiss="alert" aria-label="Cerrar"></button>
+    </div>
+}
+
+
+@{
+    ViewData["Title"] = "Médicos";
+}
+
+<div class="container py-4">
+
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+
+        <div class="card-header text-white p-4" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h3 class="mb-1 fw-bold d-flex align-items-center gap-2">
+                        <i class="bi bi-heart-pulse-fill"></i> Cuerpo Médico
+                    </h3>
+                    <p class="text-white-50 small mb-0">
+                        Administración de médicos, colegiaturas y especialidades médicas
+                    </p>
+                </div>
+
+                <div>
+                    <a asp-action="Create" class="btn btn-light text-primary fw-semibold shadow-sm d-flex align-items-center gap-2">
+                        <i class="bi bi-person-plus-fill fs-5"></i> Nuevo Médico
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="mb-4 d-flex align-items-center justify-content-between">
+                <span class="badge bg-primary-subtle text-primary fs-6 px-3 py-2 rounded-3 fw-semibold">
+                    <i class="bi bi-hash"></i> Total de médicos: @Model.Count()
+                </span>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info text-center rounded-3 p-5 border-0 bg-light">
+                    <i class="bi bi-person-vcard text-info display-4 mb-3 d-block"></i>
+                    <h5 class="fw-bold">No hay médicos registrados</h5>
+                    <p class="text-muted mb-0">
+                        Presione el botón <strong class="text-primary">"Nuevo Médico"</strong> para registrar al primer especialista.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light text-secondary text-uppercase fs-7 opacity-75">
+                            <tr>
+                                <th class="ps-3">Especialista</th>
+                                <th>N° Colegiatura</th>
+                                <th>Especialidad</th>
+                                <th width="180" class="text-end pe-3">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="ps-3 fw-medium text-dark">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="icon-shape bg-success-subtle text-success rounded-circle" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                                                <i class="bi bi-person-badge-fill fs-6"></i>
+                                            </div>
+                                            <div>
+                                                Dr(a). <span class="fw-bold">@item.Apellidos</span>, @item.Nombres
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge bg-secondary-subtle text-secondary border fw-semibold px-2 py-1.5">
+                                            CMP @item.CMP
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge bg-info-subtle text-info px-3 py-2 rounded-pill fw-semibold">
+                                            @item.Especialidad?.Nombre
+                                        </span>
+                                    </td>
+
+                                    <td class="pe-3 text-end">
+                                        <div class="d-inline-flex gap-2">
+                                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-light text-primary border shadow-sm" title="Ver perfil médico">
+                                                <i class="bi bi-eye-fill"></i>
+                                            </a>
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-light text-warning border shadow-sm" title="Editar información">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-light text-danger border shadow-sm" title="Dar de baja">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>

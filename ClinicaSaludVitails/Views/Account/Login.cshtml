@@ -1,0 +1,184 @@
+﻿@model ClinicaSaludVitails.Models.Usuario
+
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Iniciar Sesión - Salud Vitalis</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #0d6efd, #1e3c72);
+            --accent-color: #00d2ff;
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .login-card {
+            border-radius: 24px;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.95);
+            transition: all 0.4s ease;
+        }
+
+        /* Contenedor del nuevo logo médico */
+        .brand-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0d6efd, var(--accent-color));
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(13, 110, 253, 0.3);
+            color: white;
+            font-size: 38px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Estilización de inputs modernos */
+        .input-group-text {
+            background-color: #f8f9fa;
+            border-right: none;
+            color: #6c757d;
+            border-radius: 12px 0 0 12px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .form-control {
+            border-left: none;
+            border-radius: 0 12px 12px 0;
+            padding: 12px 15px;
+            font-size: 15px;
+        }
+
+            .form-control:focus {
+                box-shadow: none;
+                border-color: #dee2e6;
+            }
+
+        .input-group:focus-within .input-group-text,
+        .input-group:focus-within .form-control {
+            border-color: #0d6efd;
+            background-color: #fff;
+        }
+
+        /* Botón de ingreso premium */
+        .btn-login {
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-login:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(13, 110, 253, 0.4);
+                background: linear-gradient(135deg, #0b5ed7, #0a58ca);
+            }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center w-100 m-0">
+            <div class="col-10 col-sm-8 col-md-6 col-lg-4 p-0">
+
+                <div class="card login-card shadow-2xl border-0">
+                    <div class="card-body p-4 p-sm-5">
+
+                        <div class="text-center">
+                            <div class="brand-icon-wrapper">
+                                <i class="bi bi-heart-pulse-fill"></i>
+                            </div>
+                            <h2 class="fw-bold text-dark mb-1" style="letter-spacing: -0.5px;">
+                                Salud <span class="text-primary">Vitalis</span>
+                            </h2>
+                            <p class="text-muted small mb-4">
+                                Sistema Centralizado de Gestión Médica
+                            </p>
+                        </div>
+
+                        <form asp-action="Login" method="post">
+
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small rounded-3 mb-3"></div>
+
+                            <div class="mb-3">
+                                <label class="form-label small fw-semibold text-secondary">Correo Electrónico</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-envelope-fill"></i>
+                                    </span>
+                                    <input name="correo"
+                                           type="email"
+                                           class="form-control"
+                                           placeholder="nombre@clinica.com"
+                                           required />
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label small fw-semibold text-secondary">Contraseña</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-lock-fill"></i>
+                                    </span>
+                                    <input name="password"
+                                           type="password"
+                                           class="form-control"
+                                           placeholder="••••••••"
+                                           required />
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-login text-white">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i> Ingresar al Sistema
+                                </button>
+                            </div>
+
+                            <div class="text-center mt-4">
+                                <span class="text-muted small">¿No tienes acceso?</span>
+                                <a asp-action="Register" class="text-decoration-none small fw-semibold ms-1 text-primary">
+                                    Crear una cuenta
+                                </a>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="text-center text-white-50 mt-4">
+                    <small class="fs-7">
+                        &copy; 2026 Clínica Salud Vitalis. Todos los derechos reservados.
+                    </small>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
